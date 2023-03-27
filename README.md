@@ -93,3 +93,7 @@ for i in range(low, high + 1):
 will update our list `A` with the newly ordered and merged elements in our temporary list `tempA`. 
 
 ### def IsSorted(A)
+
+This function will run last to check if list `A` was sorted properly by comparing `prev` to the next index element of `A`, followed by ticking `prev` to the next index. Quite self explanitory.
+
+## Testing
