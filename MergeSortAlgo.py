@@ -1,5 +1,4 @@
-def Merge(A, aux, low, mid, high):
-    
+def Merge(A, tempA, low, mid, high):
     # k is an index marker for the final list, while i and j are just for the list beings merged after comparison
     k = low
     i = low
@@ -8,27 +7,27 @@ def Merge(A, aux, low, mid, high):
     # During comparison, as long as the marker hasn't reached the maximum index, all elements of both lists will be in place for comparison
     while i <= mid and j <= high:
         if A[i] <= A[j]:
-            aux[k] = A[i]
+            tempA[k] = A[i]
             k += 1
             i += 1
         else:
-            aux[k] = A[j]
+            tempA[k] = A[j]
             k += 1
             j += 1
     
     # This will only run if the index of the latter half is exceeded
     # The reason we don't run it for the j is because if the first half runs out, then the latter half should already be sorted
     while i <= mid:
-        aux[k] = A[i]
+        tempA[k] = A[i]
         k += 1
         i += 1
     
     # We proceed to append our merged and sorted list onto A, our initial/final list
     for i in range(low, high + 1):
-        A[i] = aux[i]
+        A[i] = tempA[i]
     
 
-def MergeSort(A, aux, low, high):
+def MergeSort(A, tempA, low, high):
     
     # When the markers (the lowest index and the highest index) switch, we want to end this iteration of mergesort
     if high <= low:
@@ -42,15 +41,11 @@ def MergeSort(A, aux, low, high):
     # Run another interation of mergesort using the new parameters for the divided list
     # These first line will divide continually with the first half, until there's only one element per list
     # The second line will then divide the latter half until there's only one element per list
-    MergeSort(A, aux, low, mid)
-    print(A)
-
-    MergeSort(A, aux, mid + 1, high)
-    print(A)
+    MergeSort(A, tempA, low, mid)
+    MergeSort(A, tempA, mid + 1, high)
     
     # Merge the the divided two consecutive divided lists into a singular list whilst sorting
-    Merge(A, aux, low, mid, high)
-    print(A)
+    Merge(A, tempA, low, mid, high)
 
 # This will be the final check to see if mergesort went through properly
 def IsSorted(A):
@@ -70,9 +65,9 @@ def IsSorted(A):
 
 if __name__ == "__main__":
     A = [12, 3, 18, 24, 0, 5, -2]
-    aux = A.copy()
+    tempA = A.copy()
     
-    MergeSort(A, aux, 0, len(A) - 1)
+    MergeSort(A, tempA, 0, len(A) - 1)
 
     if IsSorted(A):
         print(A)
