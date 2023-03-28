@@ -36,7 +36,7 @@ def MergeSort(A, tempA, low, high):
     # Since the above isn't true, that means the markers can be used further on to divide the given list
     # Find the mid point to divide the current list into two smaller components
     mid = low + ((high - low) >> 1)
-    # mid = low + ((high - low) // 2) -> this line and the one above do the same thing
+    # mid = low + ((high - low) // 2) this line and the one above do the same thing
     
     # Run another interation of mergesort using the new parameters for the divided list
     # These first line will divide continually with the first half, until there's only one element per list
@@ -64,7 +64,7 @@ def IsSorted(A):
     return True
 
 if __name__ == "__main__":
-    A = [12, 3, 18, 24, 0, 5, -2]
+    A = [8, 7, 6, 5, 4, 3, 2, 1, 0]
     tempA = A.copy()
     
     MergeSort(A, tempA, 0, len(A) - 1)
