@@ -97,3 +97,51 @@ will update our list `A` with the newly ordered and merged elements in our tempo
 This function will run last to check if list `A` was sorted properly by comparing `prev` to the next index element of `A`, followed by ticking `prev` to the next index. Quite self explanitory.
 
 ## Testing
+
+### A = [8, 7, 6, 5, 4, 3, 2, 1]
+
+If we were to set `A` as a decreaseing sequence to re-sort it to an increaseing sequence, the alogirthm will proceed and give:
+
+```
+[7, 8, 6, 5, 4, 3, 2, 1]
+[7, 8, 5, 6, 4, 3, 2, 1]
+[5, 6, 7, 8, 4, 3, 2, 1]
+[5, 6, 7, 8, 3, 4, 2, 1]
+[5, 6, 7, 8, 3, 4, 1, 2]
+[5, 6, 7, 8, 1, 2, 3, 4]
+[1, 2, 3, 4, 5, 6, 7, 8]
+[1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+The first line shows `[8, 7]` re-ordered to `[7, 8]`, followed by `[6, 5]` to `[5, 6]`. Then these two merge to give `[5, 6, 7, 8]`. Next the latter half does its own merging, the same way as the prior half to give `[1, 2, 3, 4]`. Finally, we get `[1, 2, 3, 4, 5, 6, 7, 8]`.
+
+### A = [8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+What will happen if we add `0` to `A`? To answer that, we get:
+
+```
+[7, 8, 6, 5, 4, 3, 2, 1, 0]
+[6, 7, 8, 5, 4, 3, 2, 1, 0]
+[6, 7, 8, 4, 5, 3, 2, 1, 0]
+[4, 5, 6, 7, 8, 3, 2, 1, 0]
+[4, 5, 6, 7, 8, 2, 3, 1, 0]
+[4, 5, 6, 7, 8, 2, 3, 0, 1]
+[4, 5, 6, 7, 8, 0, 1, 2, 3]
+[0, 1, 2, 3, 4, 5, 6, 7, 8]
+[0, 1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+In this case, the merging runs similarly as the previous list, but the initial two lines of sorting might come out as somewhat confusing. Especially with the introduction of `0`, leading to an odd number of elements. We can check the specifics if we add `print(A[low: mid + 1])` and `print(A[mid + 1: high + 1])` at the start of the `Merge()` function. Then we get:
+
+```
+[8]
+[7]
+[7, 8]
+[6]
+[5]
+[4]
+[6, 7, 8]
+[4, 5]
+```
+
+Which shows that when `A` was divided, the most left list divides `[8, 7, 6]` into `[8, 7]` and `[6]`, which will further split into `[8]` and `[7]`.
